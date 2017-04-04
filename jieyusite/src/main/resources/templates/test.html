@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3676132248" type="text/javascript" charset="utf-8"></script>
+    <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js" th:src="@{webjars/jquery/2.2.4/jquery.min.js}"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/3.3.6/bootstrap.min.js}"></script>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" rel="stylesheet" />
+
+    <meta charset="UTF-8" />
+    <title>解语</title>
+</head>
+<body>
+    <p th:text="${user.screenName}">昵称</p>
+</body>
+</html>

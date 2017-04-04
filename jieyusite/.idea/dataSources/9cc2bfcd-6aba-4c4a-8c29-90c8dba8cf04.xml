@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="PostgreSQL - jieyudb@localhost">
+  <database-model serializer="dbm" rdbms="POSTGRES" format-version="4.0">
+    <root id="1"/>
+    <database id="2" parent="1" name="jieyudb">
+      <ObjectId>16467</ObjectId>
+      <Visible>1</Visible>
+    </database>
+    <database id="3" parent="1" name="postgres">
+      <ObjectId>12177</ObjectId>
+    </database>
+    <database id="4" parent="1" name="testdb">
+      <ObjectId>16386</ObjectId>
+    </database>
+    <schema id="5" parent="2" name="public">
+      <ObjectId>2200</ObjectId>
+      <IntrospectionTimestamp>2016-07-14.19:56:11.499</IntrospectionTimestamp>
+      <IntrospectionStateNumber>18566</IntrospectionStateNumber>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="6" parent="2" name="pg_catalog">
+      <ObjectId>11</ObjectId>
+    </schema>
+    <schema id="7" parent="2" name="pg_toast">
+      <ObjectId>99</ObjectId>
+    </schema>
+    <schema id="8" parent="2" name="pg_temp_1">
+      <ObjectId>11320</ObjectId>
+    </schema>
+    <schema id="9" parent="2" name="pg_toast_temp_1">
+      <ObjectId>11321</ObjectId>
+    </schema>
+    <schema id="10" parent="2" name="information_schema">
+      <ObjectId>11627</ObjectId>
+    </schema>
+    <sequence id="11" parent="5" name="article_id_seq">
+      <ObjectId>53157</ObjectId>
+      <StateNumber>18562</StateNumber>
+    </sequence>
+    <sequence id="12" parent="5" name="author_id_seq">
+      <ObjectId>53159</ObjectId>
+      <StateNumber>18563</StateNumber>
+    </sequence>
+    <sequence id="13" parent="5" name="location_id_seq">
+      <ObjectId>53161</ObjectId>
+      <StateNumber>18564</StateNumber>
+    </sequence>
+    <sequence id="14" parent="5" name="people_id_seq">
+      <ObjectId>53163</ObjectId>
+      <StateNumber>18565</StateNumber>
+    </sequence>
+    <sequence id="15" parent="5" name="topic_id_seq">
+      <ObjectId>53165</ObjectId>
+      <StateNumber>18566</StateNumber>
+    </sequence>
+    <table id="16" parent="5" name="article">
+      <ObjectId>53035</ObjectId>
+      <StateNumber>18557</StateNumber>
+    </table>
+    <table id="17" parent="5" name="article_authors">
+      <ObjectId>53043</ObjectId>
+      <StateNumber>18553</StateNumber>
+    </table>
+    <table id="18" parent="5" name="article_locations">
+      <ObjectId>53048</ObjectId>
+      <StateNumber>18555</StateNumber>
+    </table>
+    <table id="19" parent="5" name="article_peoples">
+      <ObjectId>53053</ObjectId>
+      <StateNumber>18557</StateNumber>
+    </table>
+    <table id="20" parent="5" name="author">
+      <ObjectId>53058</ObjectId>
+      <StateNumber>18558</StateNumber>
+    </table>
+    <table id="21" parent="5" name="author_latest_topic_ids">
+      <ObjectId>53066</ObjectId>
+      <StateNumber>18558</StateNumber>
+    </table>
+    <table id="22" parent="5" name="location">
+      <ObjectId>53071</ObjectId>
+      <StateNumber>18554</StateNumber>
+    </table>
+    <table id="23" parent="5" name="people">
+      <ObjectId>53079</ObjectId>
+      <StateNumber>18556</StateNumber>
+    </table>
+    <table id="24" parent="5" name="topic">
+      <ObjectId>53087</ObjectId>
+      <StateNumber>18561</StateNumber>
+    </table>
+    <table id="25" parent="5" name="topic_related_topics">
+      <ObjectId>53095</ObjectId>
+      <StateNumber>18561</StateNumber>
+    </table>
+    <column id="26" parent="16" name="id">
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>18540</StateNumber>
+    </column>
+    <column id="27" parent="16" name="content">
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>18540</StateNumber>
+    </column>
+    <column id="28" parent="16" name="date">
+      <DataType>timestamp|0</DataType>
+      <StateNumber>18540</StateNumber>
+    </column>
+    <column id="29" parent="16" name="link">
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>18540</StateNumber>
+    </column>
+    <column id="30" parent="16" name="title">
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>18540</StateNumber>
+    </column>
+    <column id="31" parent="16" name="topic_id">
+      <DataType>integer|0</DataType>
+      <StateNumber>18540</StateNumber>
+    </column>
+    <index id="32" parent="16" name="article_pkey">
+      <ObjectId>53041</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="33" parent="16" name="article_pkey">
+      <ObjectId>53042</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>article_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="34" parent="16" name="fk_4vri019twvjcvfergb6nk6unj">
+      <ObjectId>53102</ObjectId>
+      <ColNames>topic_id</ColNames>
+      <RefTableName>topic</RefTableName>
+      <RefKeyName>topic_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="35" parent="17" name="articles_id">
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>18541</StateNumber>
+    </column>
+    <column id="36" parent="17" name="authors_id">
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>18541</StateNumber>
+    </column>
+    <index id="37" parent="17" name="article_authors_pkey">
+      <ObjectId>53046</ObjectId>
+      <ColNames>articles_id
+authors_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="38" parent="17" name="article_authors_pkey">
+      <ObjectId>53047</ObjectId>
+      <ColNames>articles_id
+authors_id</ColNames>
+      <UnderlyingIndexName>article_authors_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="39" parent="17" name="fk_7sludi64ph6cg5mfa26o7msk4">
+      <ObjectId>53112</ObjectId>
+      <ColNames>articles_id</ColNames>
+      <RefTableName>article</RefTableName>
+      <RefKeyName>article_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="40" parent="17" name="fk_slh75xtgrsdsskp8rjh1gehq3">
+      <ObjectId>53107</ObjectId>
+      <ColNames>authors_id</ColNames>
+      <RefTableName>author</RefTableName>
+      <RefKeyName>author_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="41" parent="18" name="articles_id">
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>18542</StateNumber>
+    </column>
+    <column id="42" parent="18" name="locations_id">
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>18542</StateNumber>
+    </column>
+    <index id="43" parent="18" name="article_locations_pkey">
+      <ObjectId>53051</ObjectId>
+      <ColNames>articles_id
+locations_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="44" parent="18" name="article_locations_pkey">
+      <ObjectId>53052</ObjectId>
+      <ColNames>articles_id
+locations_id</ColNames>
+      <UnderlyingIndexName>article_locations_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="45" parent="18" name="fk_c5ohec7jedisayesttsg7f7jl">
+      <ObjectId>53122</ObjectId>
+      <ColNames>articles_id</ColNames>
+      <RefTableName>article</RefTableName>
+      <RefKeyName>article_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="46" parent="18" name="fk_gus4hh3kwqyhqg4w2o32hdwxh">
+      <ObjectId>53117</ObjectId>
+      <ColNames>locations_id</ColNames>
+      <RefTableName>location</RefTableName>
+      <RefKeyName>location_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="47" parent="19" name="articles_id">
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>18543</StateNumber>
+    </column>
+    <column id="48" parent="19" name="peoples_id">
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>18543</StateNumber>
+    </column>
+    <index id="49" parent="19" name="article_peoples_pkey">
+      <ObjectId>53056</ObjectId>
+      <ColNames>articles_id
+peoples_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="50" parent="19" name="article_peoples_pkey">
+      <ObjectId>53057</ObjectId>
+      <ColNames>articles_id
+peoples_id</ColNames>
+      <UnderlyingIndexName>article_peoples_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="51" parent="19" name="fk_fipmnn4o729378c9x7rsm1nhc">
+      <ObjectId>53132</ObjectId>
+      <ColNames>articles_id</ColNames>
+      <RefTableName>article</RefTableName>
+      <RefKeyName>article_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="52" parent="19" name="fk_s2puaus55u6brnbokc5nbsys9">
+      <ObjectId>53127</ObjectId>
+      <ColNames>peoples_id</ColNames>
+      <RefTableName>people</RefTableName>
+      <RefKeyName>people_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="53" parent="20" name="id">
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>18544</StateNumber>
+    </column>
+    <column id="54" parent="20" name="description">
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>18544</StateNumber>
+    </column>
+    <column id="55" parent="20" name="link">
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>18544</StateNumber>
+    </column>
+    <column id="56" parent="20" name="name">
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>18544</StateNumber>
+    </column>
+    <index id="57" parent="20" name="author_pkey">
+      <ObjectId>53064</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="58" parent="20" name="author_pkey">
+      <ObjectId>53065</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>author_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="59" parent="21" name="author_id">
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>18545</StateNumber>
+    </column>
+    <column id="60" parent="21" name="latest_topic_ids">
+      <DataType>integer|0</DataType>
+      <StateNumber>18545</StateNumber>
+    </column>
+    <column id="61" parent="21" name="latest_topic_ids_order">
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>18545</StateNumber>
+    </column>
+    <index id="62" parent="21" name="author_latest_topic_ids_pkey">
+      <ObjectId>53069</ObjectId>
+      <ColNames>author_id
+latest_topic_ids_order</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="63" parent="21" name="author_latest_topic_ids_pkey">
+      <ObjectId>53070</ObjectId>
+      <ColNames>author_id
+latest_topic_ids_order</ColNames>
+      <UnderlyingIndexName>author_latest_topic_ids_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="64" parent="21" name="fk_kk1kyn11tn55gbglf7l6inp79">
+      <ObjectId>53137</ObjectId>
+      <ColNames>author_id</ColNames>
+      <RefTableName>author</RefTableName>
+      <RefKeyName>author_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="65" parent="22" name="id">
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>18546</StateNumber>
+    </column>
+    <column id="66" parent="22" name="description">
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>18546</StateNumber>
+    </column>
+    <column id="67" parent="22" name="link">
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>18546</StateNumber>
+    </column>
+    <column id="68" parent="22" name="name">
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>18546</StateNumber>
+    </column>
+    <index id="69" parent="22" name="location_pkey">
+      <ObjectId>53077</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="70" parent="22" name="location_pkey">
+      <ObjectId>53078</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>location_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="71" parent="23" name="id">
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>18547</StateNumber>
+    </column>
+    <column id="72" parent="23" name="description">
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>18547</StateNumber>
+    </column>
+    <column id="73" parent="23" name="link">
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>18547</StateNumber>
+    </column>
+    <column id="74" parent="23" name="name">
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>18547</StateNumber>
+    </column>
+    <index id="75" parent="23" name="people_pkey">
+      <ObjectId>53085</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="76" parent="23" name="people_pkey">
+      <ObjectId>53086</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>people_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="77" parent="24" name="id">
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>18548</StateNumber>
+    </column>
+    <column id="78" parent="24" name="link">
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>18548</StateNumber>
+    </column>
+    <column id="79" parent="24" name="name">
+      <DataType>varchar(255)|0</DataType>
+      <StateNumber>18548</StateNumber>
+    </column>
+    <column id="80" parent="24" name="parent_id">
+      <DataType>integer|0</DataType>
+      <StateNumber>18548</StateNumber>
+    </column>
+    <index id="81" parent="24" name="topic_pkey">
+      <ObjectId>53093</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="82" parent="24" name="topic_pkey">
+      <ObjectId>53094</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>topic_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="83" parent="24" name="fk_t3ee87dx5xo50vbjpn81ipgss">
+      <ObjectId>53142</ObjectId>
+      <ColNames>parent_id</ColNames>
+      <RefTableName>topic</RefTableName>
+      <RefKeyName>topic_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="84" parent="25" name="topic_id">
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>18549</StateNumber>
+    </column>
+    <column id="85" parent="25" name="related_topics_id">
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>18549</StateNumber>
+    </column>
+    <index id="86" parent="25" name="topic_related_topics_pkey">
+      <ObjectId>53098</ObjectId>
+      <ColNames>topic_id
+related_topics_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="87" parent="25" name="uk_4quaj2o86ihypjxpld8k30xx5">
+      <ObjectId>53100</ObjectId>
+      <ColNames>related_topics_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="88" parent="25" name="topic_related_topics_pkey">
+      <ObjectId>53099</ObjectId>
+      <ColNames>topic_id
+related_topics_id</ColNames>
+      <UnderlyingIndexName>topic_related_topics_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <key id="89" parent="25" name="uk_4quaj2o86ihypjxpld8k30xx5">
+      <ObjectId>53101</ObjectId>
+      <ColNames>related_topics_id</ColNames>
+      <UnderlyingIndexName>uk_4quaj2o86ihypjxpld8k30xx5</UnderlyingIndexName>
+    </key>
+    <foreign-key id="90" parent="25" name="fk_c00siytudgq1esb2d3jmo39bs">
+      <ObjectId>53152</ObjectId>
+      <ColNames>topic_id</ColNames>
+      <RefTableName>topic</RefTableName>
+      <RefKeyName>topic_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="91" parent="25" name="fk_4quaj2o86ihypjxpld8k30xx5">
+      <ObjectId>53147</ObjectId>
+      <ColNames>related_topics_id</ColNames>
+      <RefTableName>topic</RefTableName>
+      <RefKeyName>topic_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+  </database-model>
+</dataSource>

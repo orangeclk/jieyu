@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js" th:src="@{webjars/jquery/2.2.4/jquery.min.js}"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/3.3.6/bootstrap.min.js}"></script>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" rel="stylesheet" />
+
+    <meta charset="UTF-8" />
+    <title th:text="${topic.name}"></title>
+</head>
+
+<body>
+<div class="container">
+    <h1 th:text="${topic.name}"></h1>
+    <ul>
+        <li th:each="article: ${page}"><a th:href="${article.link}" th:text="${article.title}" ></a> </li>
+    </ul>
+    <nav class="pull-right">
+        <ul class="pagination" sd:pagination="full">
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

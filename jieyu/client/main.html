@@ -1,0 +1,286 @@
+<head>
+  <title>解语</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6">
+                <h1>添加文章</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="js-title">标题</label>
+                        <input type="text" class="form-control" name="title" id="js-title" placeholder="输入标题" />
+                    </div>
+                </form>
+                {{> editor}}
+            </div>
+
+            <div class="col-md-3">
+                <h1>文章信息</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="js-authors">作者</label>
+                        <input type="text" class="form-control" name="authors" id="js-authors" placeholder="输入作者，多名作者之间用空格隔开" />
+                    </div>
+                    {{#each authorPick in authorPicks}}
+                        {{> authorTemp name=authorPick.name candidates=authorPick.candidates aid=@index}}
+                    {{/each}}
+                    <div class="form-group">
+                        <label for="js-locations">地点</label>
+                        <input type="text" class="form-control" name="location" id="js-locations" placeholder="输入地点，多个地点之间用空格隔开" />
+                    </div>
+                    {{#each candidate in locationCandidates}}
+                        {{> locationTemp candidate=candidate lid=@index}}
+                    {{/each}}
+                    <div class="form-group">
+                        <label for="js-peoples">参与各方</label>
+                        <input type="text" class="form-control" name="people" id="js-peoples" placeholder="输入参与各方的全名，多个名称之间用空格隔开" />
+                    </div>
+                    {{#each peoplePick in peoplePicks}}
+                        {{> peopleTemp name=peoplePick.name candidates=peoplePick.candidates pid=@index}}
+                    {{/each}}
+                </form>
+            </div>
+
+            <div class="col-md-3">
+                <h1>所属话题</h1>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="newTopicRadios" id="js-oldTopic" checked />
+                        本文是某报道的后续
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="newTopicRadios" id="js-newTopic" />
+                        本文介绍的是全新议题
+                    </label>
+                </div>
+                {{#if isOldTopic}}
+                    <div class="alert-info collapse" role="alert" id="js-mainTopicName" >话题名称：{{mainTopicName}}</div>
+                    <form id="js-oldMainTopic">
+                        <label for="js-mainTopicSelect">您可以从下面的列表中选择一个话题：</label>
+                        <select class="form-control" id="js-mainTopicSelect">
+                            {{# each topic in topics}}
+                                <option value="{{topic.id}}">{{topic.name}}</option>
+                            {{/each}}
+                        </select>
+                        <label for="js-oldTopicName">也可以在下方文本框中输入已知话题的名称或先前报道的链接：</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="js-oldTopicName" name="text" />
+                            <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">提取话题</button>
+                                </span>
+                        </div>
+                    </form>
+                    <form id="js-relatedTopicsForm">
+                        <h3>添加相关话题</h3>
+                        <label for="js-relatedTopics">本话题目前有如下相关话题：</label>
+                        <input type="text" class="form-control" id="js-relatedTopics" data-role="tagsinput" readonly="readonly" />
+                        <br />
+                        <br />
+                        <label for="js-newRelatedTopics">如果需要添加新的相关话题，可以在下方文本框中输入该话题名称或该话题相关报道的链接：</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="js-newRelatedTopics" name="text" />
+                            <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">添加话题</button>
+                            </span>
+                        </div>
+                    </form>
+                {{else}}
+                    <form id="js-newTopic">
+                        <div class="alert-info collapse" role="alert" id="newTopic" >话题名称已提交</div>
+                        <label for="js-newTopicName">请输入新话题名称</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="js-newTopicName" name="text" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">确认新话题名称</button>
+                            </span>
+                        </div>
+                    </form>
+                    <form id="js-newParentTopic">
+                        <h3>所属话题</h3>
+                        <div class="alert-info collapse" role="alert" id="parentTopic">上级话题已提交</div>
+                        <div class="alert-warning collapse" role="alert" id="parentTopic-no-exist" >该话题名称不存在，请重新输入名称或链接</div>
+                        <label for="js-parentTopic">输入新话题的上级话题名称或链接，例如“反腐”是“山西反腐”的上级话题。</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="js-parentTopic" name="text" />
+                            <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">确认上级话题</button>
+                                </span>
+                        </div>
+                    </form>
+                    <form id="js-relatedTopicsNewForm">
+                        <h3>相关话题</h3>
+                        <input type="text" class="form-control" id="js-relatedTopicsNewTag" readonly="readonly" data-role="tagsinput" />
+                        <br />
+                        <label for="js-relatedTopicSelect">可从下列列表中选择话题：</label>
+                        <select multiple class="form-control" id="js-relatedTopicSelect">
+                            {{# each topic in topics}}
+                                <option value="{{topic.id}}">{{topic.name}}</option>
+                            {{/each}}
+                        </select>
+                        <br />
+                        <label for="newRelatedTopicsNew">或是在下方文本框中输入相关话题的名称或相关文章的链接：</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="text" id="newRelatedTopicsNew" />
+                            <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">添加相关话题</button>
+                            </span>
+                        </div>
+                    </form>
+                {{/if}}
+                <form id="js-submitArticle">
+                    <br />
+                    <button type="submit" class="btn btn-block" >提交文章</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+<template name="authorTemp">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <h4>作者：{{name}}</h4>
+            <form>
+                <div class="form-group">
+                    <p>选择本文作者，若作者不在列表中，请点击“添加新作者”</p>
+                    {{#each candidate in candidates}}
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="js-authorRadios-{{aid}}" id="js-authorRadios-{{aid}}-{{@index}}" value="{{@index}}">
+                                {{name}}：{{candidate.description}}
+                            </label>
+                        </div>
+                    {{/each}}
+                </div>
+                <input type="button" class="btn btn-primary" value="添加新作者" data-toggle="modal" data-target="#js-newAuthorModal-{{aid}}" >
+            </form>
+        </div>
+    </div>
+    <div class="modal fade" id="js-newAuthorModal-{{aid}}" tabindex="-1" role="dialog" aria-labelledby="添加新作者" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">添加新作者</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline" >
+                        <div class="form-group">
+                            <label for="js-newAuthorDesc-{{aid}}">添加新作者信息</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">{{name}}</div>
+                                <input type="text" class="form-control" id="js-newAuthorDesc-{{aid}}" placeholder="输入作者简介" />
+                            </div>
+                        </div>
+                        <button type="submit" id="js-addNewAuthor-{{aid}}" class="btn btn-success" data-dismiss="modal" >添加此新作者</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="locationTemp">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+
+            <h4>地点：{{candidate.name}}</h4>
+            {{#if candidate.location}}
+                <p>详情：{{candidate.location.description}}</p>
+            {{else}}
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-newLocationModal-{{lid}}">添加新地点</button>
+            {{/if}}
+        </div>
+    </div>
+    <div class="modal fade" id="js-newLocationModal-{{lid}}" tabindex="-1" role="dialog" aria-labelledby="添加新地点" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">添加新地点</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline" id="js-newLocationForm-{{lid}}" >
+                        <div class="alert alert-warning collapse" role="alert">注意！</div>
+                        <div class="form-group">
+                            <label for="js-newLocationDesc-{{lid}}">请补充上级地点：</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="js-newLocationDesc-{{lid}}" placeholder="如果没有上级地点，请置空" />
+                                <div class="input-group-addon">{{candidate.name}}</div>
+                            </div>
+                        </div>
+                        <button type="submit" id="js-addNewLocation-{{lid}}" class="btn btn-success" data-dismiss="modal" >添加此新地点</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="peopleTemp">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <h4>名称：{{name}}</h4>
+            <form>
+                <div class="form-group">
+                    <p>选择相关各方，若名称不在列表中，请点击“添加新名称”</p>
+                    {{#each candidate in candidates}}
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="js-peopleRadios-{{pid}}" id="js-peopleRadios-{{pid}}-{{@index}}" value="{{@index}}">
+                                {{name}}：{{candidate.description}}
+                            </label>
+                        </div>
+                    {{/each}}
+                </div>
+                <input type="button" class="btn btn-primary" value="添加新名称" data-toggle="modal" data-target="#js-newPeopleModal-{{pid}}" >
+            </form>
+        </div>
+    </div>
+    <div class="modal fade" id="js-newPeopleModal-{{pid}}" tabindex="-1" role="dialog" aria-labelledby="添加新名称" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">添加新名称</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline" >
+                        <div class="form-group">
+                            <label for="js-newPeopleDesc-{{pid}}">添加新人物/机构/组织名称</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">{{name}}</div>
+                                <input type="text" class="form-control" id="js-newPeopleDesc-{{pid}}" placeholder="输入人物/机构简介" />
+                            </div>
+                        </div>
+                        <button type="submit" id="js-addNewPeople-{{pid}}" class="btn btn-success" data-dismiss="modal" >添加此新名称</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+<template name="editor">
+    <label for="context" >正文：</label>
+    <div class="summernote" id="context" >输入正文</div>
+</template>
+
+<template name="topicTemp">
+
+</template>
